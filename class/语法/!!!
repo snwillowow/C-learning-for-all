@@ -1,0 +1,3 @@
+已经把ai相关的内容关闭，需要时点击ctrl+，在搜索框搜chat.disableai
+单词提示，搜索editor:Quick ,offWhenInlineCompletions
+幽灵文本：editor > Inline suggestions

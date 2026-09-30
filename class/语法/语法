@@ -1,0 +1,6 @@
+askkill /f /im 2.1.4.exe
+
+int%d float%f double%lf
+printf
+scanf
+

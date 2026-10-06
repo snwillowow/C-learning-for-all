@@ -1,44 +1,45 @@
 #include <stdio.h>
-#define MAX 1100
-#define class 3
-#define single_score 5
+#include <stdlib.h> // 为了 abs 函数
+
+#define MAX 1005
+
 int main()
 {
     int N;
-    if (scanf("%d", &N) != 1 || N < 2 || N > 1000)
-        return 0;
+    scanf("%d", &N);
 
-    int a[MAX][class] = {0};
+    int score[MAX][3];
+    int total[MAX]; // 每个学生的总分
+
     for (int i = 0; i < N; i++)
     {
-        for (int j = 0; j < class; j++)
-        {
-            scanf("%d", &a[i][j]);
-        }
+        scanf("%d %d %d", &score[i][0], &score[i][1], &score[i][2]);
+        total[i] = score[i][0] + score[i][1] + score[i][2];
     }
 
-    int sum = 0;
     int count = 0;
     for (int i = 0; i < N - 1; i++)
     {
         for (int j = i + 1; j < N; j++)
         {
-            int k;
-            sum = 0;
-            int b[10] = {0};
-            for (k = 0; k < class; k++)
+            // 检查单科差是否都不超过 5
+            int ok = 1;
+            for (int k = 0; k < 3; k++)
             {
-                b[k] = a[i][k] - a[j][k];
-                if (b[k] > single_score || b[k] < -single_score)
+                if (abs(score[i][k] - score[j][k]) > 5)
+                {
+                    ok = 0;
                     break;
-                sum += b[k];
+                }
             }
-            if (k != class)
-                continue;
-            if (sum <= 10 && sum >= -10)
+            // 检查总分差是否不超过 10
+            if (ok && abs(total[i] - total[j]) <= 10)
+            {
                 count++;
+            }
         }
     }
-    printf("%d", count);
+
+    printf("%d\n", count);
     return 0;
 }
